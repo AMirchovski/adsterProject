@@ -28,6 +28,10 @@ jobs:
           POSTGRES_DB: ${{ secrets.DB }}
         ports:
           - 5432:5432
+          
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
 
   build:
   
