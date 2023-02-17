@@ -16,8 +16,7 @@ on:
 
 jobs:
 
-  postgresql:
-    name: PostgreSQL Service
+  deploy:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -28,15 +27,7 @@ jobs:
           POSTGRES_DB: ${{ secrets.DB }}
         ports:
           - 5432:5432
-          
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-
-  build:
-  
-    runs-on: ubuntu-latest
-    needs: postgresql
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     
     steps:
     - uses: actions/checkout@v3
